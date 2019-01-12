@@ -4,7 +4,7 @@ main: org.thane.LangUtils
 api-version: 1.13
 depend: [ProtocolLib]
 softdepend: [NMSUtils]
-commands:
-  display:
-    usage: /display
-    description: show testing language command
+#commands:
+#  display:
+#    usage: /display
+#    description: show testing language command

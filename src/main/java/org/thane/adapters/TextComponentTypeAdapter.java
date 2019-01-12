@@ -51,7 +51,8 @@ public class TextComponentTypeAdapter extends TypeAdapter<TextComponent> {
 
     public static void writeFormatting(Gson gson, JsonWriter out, BaseComponent value) throws IOException {
         if (value.getColor() != null && value.getColor() != ChatColor.RESET) {
-            out.name("color").value(value.getColor().toString());
+            out.name("color");
+            gson.getAdapter(ChatColor.class).write(out, value.getColor());
         }
         if (value.isBold()) {
             out.name("bold").value(value.isBold());
@@ -88,7 +89,8 @@ public class TextComponentTypeAdapter extends TypeAdapter<TextComponent> {
     public static void readFormatting(Gson gson, String name, JsonReader in, BaseComponent value) throws IOException {
         switch (name) {
             case "color":
-                value.setColor(ChatColor.valueOf(in.nextString().toUpperCase().trim().replaceAll("\\s+", "_")));
+                ChatColor color = gson.getAdapter(ChatColor.class).read(in);
+                value.setColor(color);
                 break;
             case "bold":
                 value.setBold(in.nextBoolean());

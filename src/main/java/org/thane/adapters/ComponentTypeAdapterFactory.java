@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
+import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.*;
 import org.thane.LocaleMessage;
 
@@ -27,6 +28,8 @@ public class ComponentTypeAdapterFactory implements TypeAdapterFactory {
             return (TypeAdapter<T>) new BaseComponentTypeAdapter(gson);
         } else if (LocaleMessage.class.isAssignableFrom(clazz)) {
             return (TypeAdapter<T>) new LocaleMessageTypeAdapter(gson);
+        } else if (ChatColor.class.isAssignableFrom(clazz)) {
+            return (TypeAdapter<T>) new ChatColorTypeAdapter();
         } else return null;
     }
 }
